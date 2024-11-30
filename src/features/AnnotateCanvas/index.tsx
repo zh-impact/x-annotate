@@ -6,6 +6,7 @@ import { editorToolState } from "@/store/editorTool";
 import CurrentGraph from "./CurrentGraph";
 import CurrentText from "./CurrentText";
 import GraphStack from "./GraphStack";
+import FreeDraw from "./FreeDraw";
 
 export default function AnnotateCanvas() {
   const tool = useRecoilValue(editorToolState);
@@ -14,7 +15,8 @@ export default function AnnotateCanvas() {
   return (
     <>
       <GraphStack />
-
+      
+      <FreeDraw />
       {tool !== "text" && activeGraph.points?.length === 4 && <CurrentGraph />}
       {tool === "text" && <CurrentText />}
     </>

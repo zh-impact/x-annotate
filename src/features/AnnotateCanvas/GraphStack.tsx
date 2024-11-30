@@ -13,12 +13,12 @@ import { getGraphAttr } from "./logic";
 
 const toolGraphMap = {
   move: () => null,
-  pencil: () => null,
   eraser: () => null,
   line: Line,
   rect: Rect,
   ellipse: Ellipse,
   text: Text,
+  pencil: Line,
 };
 
 export default function GraphStack() {

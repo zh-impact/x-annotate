@@ -1,12 +1,12 @@
+import { useState } from "react";
 import { Button, FileButton, Group, Modal, Select } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useSetRecoilState } from "recoil";
 
-import { annotateCanvasState, annotateFileState } from "@/store/annotation";
-import { useState } from "react";
+import { annotateCanvasState } from "@/store/annotation";
+import { getImageDimensions } from "@/shared";
 
 export default function StartEntry() {
-  const setFile = useSetRecoilState(annotateFileState);
   const setCanvas = useSetRecoilState(annotateCanvasState);
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -18,13 +18,28 @@ export default function StartEntry() {
       initialized: true,
       width: parseInt(width),
       height: parseInt(height),
+      fileUrl: null,
     });
     close();
   };
 
+  const handleUploadImage = (file: File | null) => {
+    if (file) {
+      const fileUrl = URL.createObjectURL(file);
+      getImageDimensions(fileUrl).then((dimensions) => {
+        setCanvas({
+          initialized: true,
+          width: dimensions.width,
+          height: dimensions.height,
+          fileUrl,
+        });
+      });
+    }
+  };
+
   return (
     <div className="h-full flex gap-16 items-center justify-center">
-      <FileButton onChange={setFile} accept="image/png,image/jpeg">
+      <FileButton onChange={handleUploadImage} accept="image/png,image/jpeg">
         {(props) => <Button {...props}>Upload File</Button>}
       </FileButton>
       <div className="w-[2px] h-48 bg-slate-200 flex items-center justify-center">

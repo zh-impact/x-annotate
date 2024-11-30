@@ -1,28 +1,18 @@
-import {
-  ActionIcon,
-  ColorInput,
-  FileButton,
-  rem,
-  Slider,
-  Tooltip,
-} from "@mantine/core";
+import { ActionIcon, ColorInput, rem, Slider, Tooltip } from "@mantine/core";
 import {
   IconArrowBackUp,
   IconFocus2,
   IconTrash,
   IconDownload,
-  IconUpload,
 } from "@tabler/icons-react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
 import { COLOR_SWATCHES } from "@/constants";
 
 import { editorControlsState } from "@/store/editorControl";
-import { annotateFileState } from "@/store/annotation";
 
 export default function EditorControls() {
   const [controls, setControls] = useRecoilState(editorControlsState);
-  const setFile = useSetRecoilState(annotateFileState);
 
   return (
     <>
@@ -64,15 +54,6 @@ export default function EditorControls() {
         <ActionIcon>
           <IconDownload />
         </ActionIcon>
-      </Tooltip>
-      <Tooltip label="Upload">
-        <FileButton onChange={setFile} accept="image/png,image/jpeg">
-          {(props) => (
-            <ActionIcon {...props}>
-              <IconUpload />
-            </ActionIcon>
-          )}
-        </FileButton>
       </Tooltip>
     </>
   );

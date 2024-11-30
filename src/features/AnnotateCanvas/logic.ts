@@ -4,8 +4,13 @@ import { type Graph } from "@/store/graphCurrent";
 import { EditorControl } from "@/store/editorControl";
 
 export function getGraphAttr(graph: Graph, control?: EditorControl) {
-  if (graph.tool === "line") {
-    return { points: graph.points } as Konva.LineConfig;
+  if (graph.tool === "line" || graph.tool === "pencil") {
+    return {
+      points: graph.points,
+      tension: graph.tool === "pencil" ? 0.5 : 0,
+      lineCap: graph.tool === "pencil" ? "round" : "butt",
+      lineJoin: graph.tool === "pencil" ? "round" : "miter",
+    } as Konva.LineConfig;
   } else if (graph.tool === "rect") {
     return {
       x: graph?.points?.[0],

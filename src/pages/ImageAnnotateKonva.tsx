@@ -27,6 +27,16 @@ export default function ImageAnnotateKonva() {
   const handleMouseDown = (options: Konva.KonvaEventObject<MouseEvent>) => {
     const { layerX: x, layerY: y } = options.evt;
     if (tool === "move") return;
+
+    if (tool === "pencil") {
+      setActiveGraph({
+        tool,
+        points: [x, y],
+        ...controls,
+      });
+      return;
+    }
+
     if (drawGraph.includes(tool)) {
       if (!activeGraph.points?.length) {
         setActiveGraph({
@@ -51,6 +61,16 @@ export default function ImageAnnotateKonva() {
 
   const handleMouseMove = (options: Konva.KonvaEventObject<MouseEvent>) => {
     if (tool === "move") return;
+
+    if (tool === "pencil" && activeGraph.points?.length) {
+      const { layerX: x, layerY: y } = options.evt;
+      setActiveGraph((prev) => ({
+        ...prev,
+        points: [...prev.points, x, y],
+      }));
+      return;
+    }
+
     if (drawGraph.includes(tool) && activeGraph.points?.length) {
       setActiveGraph((prev) => ({
         ...prev,
@@ -61,6 +81,13 @@ export default function ImageAnnotateKonva() {
           options.evt.layerY,
         ],
       }));
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (tool === "pencil" && activeGraph.points?.length) {
+      setHistoryGraphs((prev) => [...prev, activeGraph]);
+      setActiveGraph({ tool, points: [] });
     }
   };
 
@@ -79,18 +106,19 @@ export default function ImageAnnotateKonva() {
         {annotation.initialized ? (
           <div className="h-full flex items-center justify-center">
             <div
-              className={`w-[${annotation.canvas.width}px] h-[${annotation.canvas.height}px]`}
+              className={`w-[${annotation.width}px] h-[${annotation.height}px]`}
             >
               <Stage
-                width={annotation.canvas.width}
-                height={annotation.canvas.height}
+                width={annotation.width}
+                height={annotation.height}
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
                 className="bg-white"
               >
                 <Layer>
                   {annotation.fileUrl && <URLImage src={annotation.fileUrl} />}
-
                   <AnnotateCanvas />
                 </Layer>
               </Stage>
