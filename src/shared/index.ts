@@ -16,3 +16,19 @@ export function hexValueToColorString(value: number) {
 export function randomColor() {
   return hexValueToColorString(randomColorValue());
 }
+
+export function getImageDimensions(
+  url: string
+): Promise<{ width: number; height: number }> {
+  const image = new Image();
+  image.src = url;
+
+  return new Promise((resolve) => {
+    image.onload = () => {
+      resolve({
+        width: image.width,
+        height: image.height,
+      });
+    };
+  });
+}
