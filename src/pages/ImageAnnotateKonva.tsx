@@ -23,12 +23,13 @@ export default function ImageAnnotateKonva() {
   const setHistoryGraphs = useSetRecoilState(graphStackState);
 
   const drawGraph: ToolType[] = ["line", "rect", "ellipse"];
+  const freeDrawTools: ToolType[] = ["pencil", "eraser"];
 
   const handleMouseDown = (options: Konva.KonvaEventObject<MouseEvent>) => {
     const { layerX: x, layerY: y } = options.evt;
     if (tool === "move") return;
 
-    if (tool === "pencil") {
+    if (freeDrawTools.includes(tool)) {
       setActiveGraph({
         tool,
         points: [x, y],
@@ -62,7 +63,7 @@ export default function ImageAnnotateKonva() {
   const handleMouseMove = (options: Konva.KonvaEventObject<MouseEvent>) => {
     if (tool === "move") return;
 
-    if (tool === "pencil" && activeGraph.points?.length) {
+    if (freeDrawTools.includes(tool) && activeGraph.points?.length) {
       const { layerX: x, layerY: y } = options.evt;
       setActiveGraph((prev) => ({
         ...prev,
@@ -85,7 +86,7 @@ export default function ImageAnnotateKonva() {
   };
 
   const handleMouseUp = () => {
-    if (tool === "pencil" && activeGraph.points?.length) {
+    if (freeDrawTools.includes(tool) && activeGraph.points?.length) {
       setHistoryGraphs((prev) => [...prev, activeGraph]);
       setActiveGraph({ tool, points: [] });
     }

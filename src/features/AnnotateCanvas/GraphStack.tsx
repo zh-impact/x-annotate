@@ -13,12 +13,12 @@ import { getGraphAttr } from "./logic";
 
 const toolGraphMap = {
   move: () => null,
-  eraser: () => null,
   line: Line,
   rect: Rect,
   ellipse: Ellipse,
   text: Text,
   pencil: Line,
+  eraser: Line,
 };
 
 export default function GraphStack() {
@@ -67,7 +67,7 @@ const HistoryGraph = (
   const control = useRecoilValue(editorControlsState);
   const index = graphStack.findIndex((g) => g === graph);
 
-  const graphAttr = getGraphAttr(graph, control) as Konva.EllipseConfig;
+  const graphAttr = getGraphAttr(graph, control);
   const Component = toolGraphMap[graph.tool!];
   if (!Component) return null;
 
@@ -85,8 +85,6 @@ const HistoryGraph = (
     <Component
       ref={ref as any}
       {...graphAttr}
-      stroke={graph.color}
-      strokeWidth={graph.strokeWidth}
       draggable={graph.draggable}
       onMouseDown={handleMouseDown}
     />

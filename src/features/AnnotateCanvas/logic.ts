@@ -4,12 +4,16 @@ import { type Graph } from "@/store/graphCurrent";
 import { EditorControl } from "@/store/editorControl";
 
 export function getGraphAttr(graph: Graph, control?: EditorControl) {
-  if (graph.tool === "line" || graph.tool === "pencil") {
+  if (graph.tool === "line" || graph.tool === "pencil" || graph.tool === "eraser") {
+    const isEraser = graph.tool === "eraser";
     return {
       points: graph.points,
-      tension: graph.tool === "pencil" ? 0.5 : 0,
-      lineCap: graph.tool === "pencil" ? "round" : "butt",
-      lineJoin: graph.tool === "pencil" ? "round" : "miter",
+      tension: graph.tool === "pencil" || isEraser ? 0.5 : 0,
+      lineCap: graph.tool === "pencil" || isEraser ? "round" : "butt",
+      lineJoin: graph.tool === "pencil" || isEraser ? "round" : "miter",
+      globalCompositeOperation: isEraser ? "destination-out" : "source-over",
+      stroke: isEraser ? "white" : graph.color,
+      strokeWidth: isEraser ? (graph.strokeWidth || control?.strokeWidth || 2) * 2 : graph.strokeWidth,
     } as Konva.LineConfig;
   } else if (graph.tool === "rect") {
     return {
