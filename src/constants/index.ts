@@ -14,3 +14,15 @@ export const COLOR_SWATCHES = [
   '#fab005', // Orange
   '#fd7e14', // Brown
 ];
+
+// Paper size without bleed area in pixels
+export const PAPER_SIZE_WITHOUT_BLEED_AREA = {
+  A1: {
+    width: 9933,
+    height: 7016,
+  },
+  A4: {
+    width: 3508,
+    height: 2480,
+  },
+} as const;
