@@ -7,11 +7,11 @@ import {
   IconDownload,
 } from '@tabler/icons-react';
 
-import { COLOR_SWATCHES } from '../constants';
-import { editorControl } from '../atoms';
+import { COLOR_SWATCHES } from '@/constants';
+import { editorControlAtom } from '@/atoms';
 
 export function EditorControls() {
-  const [controls, setControls] = useAtom(editorControl);
+  const [controls, setControls] = useAtom(editorControlAtom);
 
   return (
     <>

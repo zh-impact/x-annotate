@@ -10,7 +10,7 @@ import {
 import { Tooltip } from '@mantine/core';
 import { useAtom } from 'jotai';
 
-import { editorToolState, tools } from '../atoms';
+import { editorToolAtom, editorTools } from '@/atoms';
 
 const iconNameMap = {
   move: IconArrowsMove,
@@ -23,11 +23,11 @@ const iconNameMap = {
 };
 
 export function ToolBox() {
-  const [tool, setTool] = useAtom(editorToolState);
+  const [tool, setTool] = useAtom(editorToolAtom);
 
   return (
     <div className="tool-box flex flex-col items-center">
-      {tools.map((t) => {
+      {editorTools.map((t) => {
         const Icon = iconNameMap[t];
         return (
           <div

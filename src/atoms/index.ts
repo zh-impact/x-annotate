@@ -2,11 +2,19 @@ import { atom } from 'jotai';
 
 // Editor Control
 
-export const editorControl = atom({ color: '#a855f7', strokeWidth: 2 });
+export type EditorControl = {
+  color: string;
+  strokeWidth: number;
+};
 
-// Tool Type
+export const editorControlAtom = atom<EditorControl>({
+  color: '#a855f7',
+  strokeWidth: 2,
+});
 
-export type ToolType =
+// Editor Tool
+
+export type EditorTool =
   | 'move'
   | 'pencil'
   | 'eraser'
@@ -15,7 +23,7 @@ export type ToolType =
   | 'rect'
   | 'text';
 
-export const tools: ToolType[] = [
+export const editorTools: EditorTool[] = [
   'move',
   'pencil',
   'eraser',
@@ -25,18 +33,18 @@ export const tools: ToolType[] = [
   'text',
 ];
 
-export const editorToolState = atom<ToolType>('line');
+export const editorToolAtom = atom<EditorTool>('line');
 
-// Canvas
+// Annotation Canvas
 
-type CanvasState = {
+type AnnoCanvas = {
   initialized: boolean;
   width: number;
   height: number;
   fileUrl: string | null;
 };
 
-export const annotateCanvasState = atom<CanvasState>({
+export const annotationCanvasAtom = atom<AnnoCanvas>({
   initialized: false,
   width: 640,
   height: 480,
@@ -45,10 +53,13 @@ export const annotateCanvasState = atom<CanvasState>({
 
 // Graph
 
+type Point = [number, number];
+export type Points = Point[];
+
 export type PointPair = number[];
 
 export type Graph = {
-  tool?: ToolType;
+  tool?: EditorTool;
   points: PointPair;
   color?: string;
   strokeWidth?: number;
@@ -56,10 +67,10 @@ export type Graph = {
   text?: string;
 };
 
-export const activeGraphState = atom<Graph>({
+export const currentGraphAtom = atom<Graph>({
   tool: undefined,
   points: [],
   draggable: false,
 });
 
-export const graphStackState = atom<Graph[]>([]);
+export const graphStackAtom = atom<Graph[]>([]);

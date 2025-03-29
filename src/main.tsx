@@ -6,6 +6,9 @@ import { createRoot } from 'react-dom/client';
 import { MantineProvider } from '@mantine/core';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 
+import { DevTools } from 'jotai-devtools';
+import 'jotai-devtools/styles.css';
+
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
 
@@ -22,6 +25,7 @@ declare module '@tanstack/react-router' {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <MantineProvider>
+      <DevTools />
       <RouterProvider router={router} />
     </MantineProvider>
   </StrictMode>,

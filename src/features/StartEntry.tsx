@@ -3,12 +3,14 @@ import { Button, FileButton, Group, Modal, Select } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useSetAtom } from 'jotai';
 
-import { annotateCanvasState } from '../atoms';
-import { getImageDimensions } from '../shared';
+import { annotationCanvasAtom } from '@/atoms';
+import { getImageDimensions } from '@/shared';
+import { useNavigate } from '@tanstack/react-router';
 
 export function StartEntry() {
-  const setCanvas = useSetAtom(annotateCanvasState);
+  const setCanvas = useSetAtom(annotationCanvasAtom);
   const [opened, { open, close }] = useDisclosure(false);
+  const navigate = useNavigate();
 
   const [value, setValue] = useState<string | null>('640x480');
 
@@ -21,6 +23,7 @@ export function StartEntry() {
       fileUrl: null,
     });
     close();
+    navigate({ to: '/annotate' });
   };
 
   const handleUploadImage = (file: File | null) => {
