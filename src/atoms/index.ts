@@ -33,7 +33,7 @@ export const editorTools: EditorTool[] = [
   'text',
 ];
 
-export const editorToolAtom = atom<EditorTool>('line');
+export const editorToolAtom = atom<EditorTool>('pencil');
 
 // Annotation Canvas
 

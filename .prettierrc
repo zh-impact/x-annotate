@@ -1,0 +1,49 @@
+{
+  "printWidth": 80,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "plugins": [
+    "@ianvs/prettier-plugin-sort-imports"
+  ],
+  "importOrder": [
+    "^react(.*)$",
+    "^@mantine(.*)$",
+    "^@tabler(.*)$",
+    "^@tanstack(.*)$",
+    "^jotai(.*)$",
+    "^konva(.*)$",
+    "^react-konva(.*)$",
+    "",
+    "^@/.*$",
+    "",
+    "^[./]"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "vite.config.ts"
+      ],
+      "options": {
+        "plugins": [
+          "@ianvs/prettier-plugin-sort-imports"
+        ],
+        "importOrder": [
+          "^vite(.*)$",
+          "",
+          "^@.*$",
+          "",
+          "<THIRD_PARTY_MODULES>",
+          "",
+          "^[./]"
+        ]
+      }
+    },
+    {
+      "files": "*.mdx",
+      "options": {
+        "printWidth": 70
+      }
+    }
+  ]
+}

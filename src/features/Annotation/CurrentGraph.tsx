@@ -1,6 +1,6 @@
-import type Konva from 'konva';
-import { Rect, Line, Ellipse } from 'react-konva';
+import { Ellipse, Line, Rect } from 'react-konva';
 import { useAtomValue } from 'jotai';
+import type Konva from 'konva';
 
 import { currentGraphAtom, editorToolAtom } from '@/atoms';
 

@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "@tanstack/react-router-devtools": "^1.114.29",
     "@tanstack/router-plugin": "^1.114.29",
     "@testing-library/dom": "^10.4.0",
@@ -42,14 +43,12 @@
     "postcss": "^8.5.3",
     "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
+    "prettier": "^3.5.3",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.9"
-  },
-  "prettier": {
-    "singleQuote": true
   },
   "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c"
 }

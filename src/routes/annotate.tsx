@@ -29,11 +29,11 @@ function Annotate() {
           <EditorControls />
         </div>
 
-        <div className="sidebar bg-slate-400 py-4">
+        <div className="sidebar bg-slate-100 py-4">
           <ToolBox />
         </div>
 
-        <div className="content flex-grow bg-slate-500">
+        <div className="content flex-grow bg-slate-200">
           {annotationCanvas.initialized ? (
             <div className="h-full flex items-center justify-center">
               <div
