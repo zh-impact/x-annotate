@@ -17,8 +17,10 @@
     "@tanstack/react-router": "^1.168.10",
     "@tanstack/react-router-devtools": "^1.166.11",
     "@xnote/ui": "workspace:*",
+    "konva": "^10.2.3",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "react-konva": "^19.2.3",
     "zustand": "^5.0.12"
   },
   "devDependencies": {

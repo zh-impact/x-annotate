@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { App } from '@/features/StartEntry'
+import { StartEntry } from '@/components/start-entry'
 
 export const Route = createFileRoute('/')({
   component: Index,
@@ -9,7 +9,7 @@ export const Route = createFileRoute('/')({
 function Index() {
   return (
     <div className="p-2">
-      <App />
+      <StartEntry />
     </div>
   )
 }

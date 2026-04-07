@@ -1,37 +1,27 @@
 import { Button } from '@xnote/ui/components/button'
 
 import { SolidIcon } from '@/components/solid-icon'
+import { useAnnoteStore, type EditorTool } from '@/store'
+
+const tools: EditorTool[] = ['move', 'pencil', 'eraser', 'line', 'ellipse', 'rect', 'text']
 
 export function EditorTool() {
+  const tool = useAnnoteStore((s) => s.editorTool)
+  const setTool = useAnnoteStore((s) => s.setEditorTool)
+
   return (
     <div className="tool-box flex flex-col items-center">
-      <Button variant="outline" size="icon" aria-label="Move">
-        <SolidIcon name="move" />
-      </Button>
-
-      <Button variant="outline" size="icon" aria-label="Pencil">
-        <SolidIcon name="pencil" />
-      </Button>
-
-      <Button variant="outline" size="icon" aria-label="Eraser">
-        <SolidIcon name="eraser" />
-      </Button>
-
-      <Button variant="outline" size="icon" aria-label="Line">
-        <SolidIcon name="line" />
-      </Button>
-
-      <Button variant="outline" size="icon" aria-label="Ellipse">
-        <SolidIcon name="ellipse" />
-      </Button>
-
-      <Button variant="outline" size="icon" aria-label="Rectangle">
-        <SolidIcon name="rect" />
-      </Button>
-
-      <Button variant="outline" size="icon" aria-label="Text">
-        <SolidIcon name="text" />
-      </Button>
+      {tools.map((t) => (
+        <Button
+          key={t}
+          variant={tool === t ? 'default' : 'outline'}
+          size="icon"
+          aria-label={t.charAt(0).toUpperCase() + t.slice(1)}
+          onClick={() => setTool(t)}
+        >
+          <SolidIcon name={t} />
+        </Button>
+      ))}
     </div>
   )
 }
