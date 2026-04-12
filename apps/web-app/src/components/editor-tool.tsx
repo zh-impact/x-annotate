@@ -1,9 +1,9 @@
 import { Button } from '@xnote/ui/components/button'
 
 import { SolidIcon } from '@/components/solid-icon'
-import { useAnnoteStore, type EditorTool } from '@/store'
+import { type EditorTool as TEditorTool, useAnnoteStore } from '@/store'
 
-const tools: EditorTool[] = ['move', 'pencil', 'eraser', 'line', 'ellipse', 'rect', 'text']
+const tools: TEditorTool[] = ['move', 'pencil', 'eraser', 'line', 'ellipse', 'rect', 'text']
 
 export function EditorTool() {
   const tool = useAnnoteStore((s) => s.editorTool)

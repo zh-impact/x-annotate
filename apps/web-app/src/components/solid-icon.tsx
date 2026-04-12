@@ -1,18 +1,18 @@
-import type { ComponentProps } from 'react'
-import { HugeiconsIcon } from '@hugeicons/react'
 import {
-  UndoIcon,
-  RedoIcon,
+  CircleIcon,
+  CursorTextIcon,
   Delete01Icon,
   Download01Icon,
-  MoveIcon,
-  PencilEditIcon,
   EraserIcon,
   LinerIcon,
-  CircleIcon,
+  MoveIcon,
+  PencilEditIcon,
   RectangularIcon,
-  CursorTextIcon,
+  RedoIcon,
+  UndoIcon,
 } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
+import type { ComponentProps } from 'react'
 
 const iconMap: Record<string, typeof UndoIcon> = {
   undo: UndoIcon,

@@ -1,7 +1,4 @@
-import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-
-import { Input } from '@xnote/ui/components/input'
 import { Button } from '@xnote/ui/components/button'
 import {
   Dialog,
@@ -13,6 +10,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@xnote/ui/components/dialog'
+import { Field, FieldGroup } from '@xnote/ui/components/field'
+import { Input } from '@xnote/ui/components/input'
+import { Label } from '@xnote/ui/components/label'
 import {
   Select,
   SelectContent,
@@ -22,8 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@xnote/ui/components/select'
-import { Field, FieldGroup } from '@xnote/ui/components/field'
-import { Label } from '@xnote/ui/components/label'
+import { useState } from 'react'
 
 import { getImageDimensions } from '@/shared'
 import { useAnnoteStore } from '@/store'

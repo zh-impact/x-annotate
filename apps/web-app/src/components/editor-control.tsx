@@ -1,5 +1,5 @@
-import { Slider } from '@xnote/ui/components/slider'
 import { Button } from '@xnote/ui/components/button'
+import { Slider } from '@xnote/ui/components/slider'
 
 import { SolidIcon } from '@/components/solid-icon'
 import { useAnnoteStore } from '@/store'

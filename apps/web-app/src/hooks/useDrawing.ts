@@ -1,6 +1,6 @@
 import type Konva from 'konva'
 
-import { useAnnoteStore, type EditorTool } from '@/store'
+import { type EditorTool, useAnnoteStore } from '@/store'
 
 const drawGraphTools: EditorTool[] = ['line', 'rect', 'ellipse']
 const freeDrawTools: EditorTool[] = ['pencil', 'eraser']

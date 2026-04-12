@@ -1,6 +1,6 @@
+import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
 
 import '@xnote/ui/globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -18,9 +18,9 @@ declare module '@tanstack/react-router' {
   }
 }
 
-const rootElement = document.getElementById('root')!
+const rootElement = document.getElementById('root')
 
-if (!rootElement.innerHTML) {
+if (rootElement) {
   createRoot(rootElement).render(
     <StrictMode>
       <ThemeProvider>
