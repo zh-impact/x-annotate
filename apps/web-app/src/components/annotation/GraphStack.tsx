@@ -1,11 +1,13 @@
-import { Fragment } from 'react'
+import { type ElementType, Fragment } from 'react'
 import { Ellipse, Line, Rect, Text } from 'react-konva'
 
-import { useAnnoteStore, type EditorTool } from '@/store'
+import { type EditorTool, useAnnoteStore } from '@/store'
 
 import { getGraphAttr } from './logic'
 
-const toolGraphMap: Partial<Record<EditorTool, React.FC>> = {
+type GraphRenderer = typeof Line | typeof Rect | typeof Ellipse | typeof Text
+
+const toolGraphMap: Partial<Record<EditorTool, GraphRenderer>> = {
   line: Line,
   rect: Rect,
   ellipse: Ellipse,
@@ -21,7 +23,9 @@ export default function GraphStack() {
   return (
     <>
       {graphStack.map((graph, index) => {
-        const Component = toolGraphMap[graph.tool!]
+        if (!graph.tool) return null
+
+        const Component = toolGraphMap[graph.tool] as ElementType | undefined
         if (!Component) return null
         return (
           <Fragment key={index}>
