@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useEffect } from 'react'
 import { Layer, Stage } from 'react-konva'
 import { Annotation } from '@/components/annotation'
 import { EditorControl } from '@/components/editor-control'
@@ -14,6 +15,66 @@ export const Route = createFileRoute('/annotate')({
 function RouteComponent() {
   const annotationCanvas = useAnnoteStore((state) => state.annotationCanvas)
   const { handleDrawStart, handleDrawing, handleDrawEnd } = useDrawing()
+
+  useEffect(() => {
+    const isEditableTarget = (target: EventTarget | null) => {
+      if (!(target instanceof HTMLElement)) {
+        return false
+      }
+
+      return (
+        target.isContentEditable ||
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.tagName === 'SELECT'
+      )
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.altKey || isEditableTarget(event.target)) {
+        return
+      }
+
+      if (!event.ctrlKey && !event.metaKey) {
+        return
+      }
+
+      const key = event.key.toLowerCase()
+      if (key !== 'z' && key !== 'y') {
+        return
+      }
+
+      const state = useAnnoteStore.getState()
+      if (!state.annotationCanvas.initialized) {
+        return
+      }
+
+      const shouldRedo = key === 'y' || (key === 'z' && event.shiftKey)
+
+      if (shouldRedo) {
+        if (!state.history.future.length) {
+          return
+        }
+
+        event.preventDefault()
+        state.redo()
+        return
+      }
+
+      if (!state.currentGraph && !state.history.past.length) {
+        return
+      }
+
+      event.preventDefault()
+      state.undo()
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
 
   return (
     <div className="h-[calc(100vh-41px)]">
